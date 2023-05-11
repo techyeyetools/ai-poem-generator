@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ai Poem Generator</title>
+    <meta name="description" content="Try our AI Poem Generator tool for creative and unique poems on any topic. With cutting-edge technology, it's a new world of poetry that will amaze you!">
+    <meta name="keywords" content="ai poem generator, poem generator, poem maker">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="poem-logo.svg">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/terms">Terms</a></li>
+      <li><a href="/privacy-policy">Privacy</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <h1>Poem Generator</h1>
+    <form>
+      <label for="topic">Enter a topic:</label>
+      <input type="text" id="topic" name="topic" required>
+      <button type="submit">Generate Poem
+    </button>
+</form>
+<div id="poem"></div>
+</div>
+<script >
+const form = document.querySelector('form');
+const input = document.querySelector('#topic');
+const poemContainer = document.querySelector('#poem');
+
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  // get the topic from the input field
+  const topic = input.value.trim();
+
+  // send the API request to generate a poem
+  fetch(`/generate?topic=${encodeURIComponent(topic)}`)
+    .then(response => response.text())
+    .then(poem => {
+      // display the generated poem
+      poemContainer.innerHTML = `<p>${poem}</p>`;
+    })
+    .catch(error => {
+      console.error(error);
+      poemContainer.innerHTML = '<p>An error occurred. Please try again later.</p>';
+    });
+});
+
+</script>
+<footer>
+
+  <div class="footer">
+      <p>&copy; 2023 AiPoemGenerator | All Rights Reserved.</p>
+
+
+</footer>
+</body>
+</html>
